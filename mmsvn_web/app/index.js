@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 require('./Routes/account.router')(app);
+require('./Routes/group_pr.router')(app);
 console.log('Ready for new challenges');
  
 

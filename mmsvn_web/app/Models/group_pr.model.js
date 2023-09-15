@@ -27,7 +27,7 @@ group_pr.getByid = function(id_group, resutl  ){
 }
 
 group_pr.create = function(data, resutl){
-    db.query("INSERT INTO group_pr set ?", data,function (err,[data.name, data.detail, data.detail_en]){
+    db.query("INSERT INTO group_pr set ?", [data.name, data.detail, data.detail_en],function (err,group_pr){
         console.log (err, group_pr);
         if(err){
             resutl("lỗi cmnr");
