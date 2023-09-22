@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 require('./Routes/account.router')(app);
 require('./Routes/group_pr.router')(app);
+require('./Routes/product.router')(app);
 console.log('Ready for new challenges');
  
 

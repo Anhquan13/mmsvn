@@ -6,7 +6,8 @@ const storage = multer.diskStorage({
         res(null, './app/storage/')
     },
     filename : function (req, file, res){
-        res(null, file.originalname)
+        res(null, Date.now()+ file.originalname)
+        return this.filename
     }
 });
 // Khai báo đối tượng multer
