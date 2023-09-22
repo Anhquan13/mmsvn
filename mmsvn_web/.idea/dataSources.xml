@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/mmsvn_db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="vnwaterjet_db@192.168.51.2" uuid="ef6b0e96-26dc-4ac7-911e-dc2c8a282680">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://192.168.51.2:3306/vnwaterjet_db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
