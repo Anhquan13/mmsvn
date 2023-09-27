@@ -3,7 +3,7 @@ const multer = require('multer');
 // config nơi lưu, cách lưu
 const storage = multer.diskStorage({
     destination : function (req, file, res){
-        res(null, './app/storage/')
+        res(null, '.%2Fapp%2Fstorage%2F')
     },
     filename : function (req, file, res){
         res(null, Date.now()+ file.originalname)

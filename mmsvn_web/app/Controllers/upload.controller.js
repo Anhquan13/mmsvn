@@ -24,9 +24,9 @@ exports.photo = function (req){
     }else if (typei.indexOf(img.mimetype) === -1){
 
         error = new Error('Please upload file image .jpg, .jpeg or .png ');
-        fs.unlink('./app/storage/'+ img.filename , function (err) {
+        fs.unlink('.%2Fapp%2Fstorage%2F'+ img.filename , function (err) {
             if (err) throw err;
-            console.log('File deleted!' +img.filename);
+            console.log('File deleted! ' +img.filename);
         });
 
         error.httpStatusCode = 401;

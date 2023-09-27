@@ -12,6 +12,11 @@ app.use(function (req, res, next){
 })
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+require('./Routes/banner.router')(app);
+require('./Routes/web_info.router')(app);
+require('./Routes/post.router')(app);
+require('./Routes/sub_pr.router')(app);
+require('./Routes/readfile_router')(app);
 
 require('./Routes/account.router')(app);
 require('./Routes/group_pr.router')(app);

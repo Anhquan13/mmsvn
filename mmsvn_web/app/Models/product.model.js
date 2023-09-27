@@ -29,7 +29,7 @@ product.getByid = function(id_product, resutl  ){
     db.query("select * from product where id_product = ?",id_product,function (err,product){
 //        console.log (err,product);
         if(err || (product.length==0)){
-            resutl("yes");
+            resutl("Khong co san pham");
         }
         else     {resutl (product[0]);}
     });
