@@ -17,6 +17,7 @@ require('./Routes/web_info.router')(app);
 require('./Routes/post.router')(app);
 require('./Routes/sub_pr.router')(app);
 require('./Routes/readfile_router')(app);
+require('./Routes/customer.router')(app);
 
 require('./Routes/account.router')(app);
 require('./Routes/group_pr.router')(app);

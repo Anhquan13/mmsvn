@@ -3,7 +3,7 @@ db = require('../common/connect');
 
 const product = function(){
     this.id_product = product.id_product;
-    this.name = group.name;
+    this.name = product.name;
     this.des = product.des;
     this.spec = product.spec;
     this.des_en = product.des_en;
