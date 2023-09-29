@@ -1,6 +1,6 @@
 module.exports = function(router){
 
-    const groupcontroller = require('../Controllers/group_pr.controller')
+    const groupcontroller = require('../../Controllers/group_pr.controller')
 
 
 

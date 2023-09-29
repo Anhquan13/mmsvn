@@ -1,7 +1,7 @@
 module.exports = function(router){
 
-    const customercontroller = require('../Controllers/customer.controller')
-    upload = require('../common/SaveFile');
+    const customercontroller = require('../../Controllers/customer.controller')
+    upload = require('../../common/SaveFile');
 
 
 

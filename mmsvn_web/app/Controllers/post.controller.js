@@ -22,13 +22,13 @@ exports.add_post = function(req,res){
     //   console.log("name là: ");
     var rep = up.photo(req);
     console.log("rep la1: "+ rep);
-    if (rep === up.error){
+    if (rep instanceof Error){
         res.send(rep.message);
         console.log("rep la: "+ rep);
-//        console.log('vao ham upload2: '+ rep.message);
+
     } else{
         data.image = '%2Fapp%2Fstorage%2F'+ rep;
-        console.log("rep la:  "+ rep);
+        console.log("rep la2: ");
         post.create(data, function(temp){
             res.send({resutl: temp})
         })

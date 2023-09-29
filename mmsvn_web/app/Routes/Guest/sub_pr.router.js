@@ -1,7 +1,7 @@
 module.exports = function(router){
 
-    const subcontroller = require('../Controllers/sub_pr.controller')
-    upload = require('../common/SaveFile');
+    const subcontroller = require('../../Controllers/sub_pr.controller')
+    upload = require('../../common/SaveFile');
 
 
 

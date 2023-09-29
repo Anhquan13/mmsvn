@@ -22,7 +22,7 @@ exports.add_sub = function(req,res){
     //   console.log("name là: ");
     var rep = up.photo(req);
     console.log("rep la1: "+ rep);
-    if (rep === up.error){
+    if (rep instanceof Error){
         res.send(rep.message);
         console.log("rep la: "+ rep);
 //        console.log('vao ham upload2: '+ rep.message);
@@ -67,8 +67,7 @@ exports.update_sub = function (req, res){
         })
     }else{
         var rep = up.photo(req);
-        console.log("rep la1: "+ rep);
-        if (rep === up.error){
+        if (rep instanceof Error){
             res.send(rep.message);
 //            console.log("rep la: "+ rep); //test
 //        console.log('vao ham upload2: '+ rep.message);

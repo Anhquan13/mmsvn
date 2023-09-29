@@ -1,6 +1,6 @@
 module.exports = function(router){
 
-    const webinfcontroller = require('../Controllers/web_info.controller')
+    const webinfcontroller = require('../../Controllers/web_info.controller')
 
 
 

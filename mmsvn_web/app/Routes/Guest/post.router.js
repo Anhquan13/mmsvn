@@ -1,7 +1,7 @@
 module.exports = function(router){
 
-    const postcontroller = require('../Controllers/post.controller')
-    upload = require('../common/SaveFile');
+    const postcontroller = require('../../Controllers/post.controller')
+    upload = require('../../common/SaveFile');
     fs = require('fs');
 
 

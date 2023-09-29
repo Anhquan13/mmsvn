@@ -14,17 +14,17 @@ exports.single = function (req){
 
 exports.photo = function (req){
     var img = req.file;
-//    console.log('vao ham upload: ' + img.originalname);
+    console.log('vao ham upload: ');
     var typei = ['image/png', 'image/jpg', 'image/jpeg'];
-//    console.log('vao ham upload2: ');
+    console.log('vao ham upload2: ');
     if (!img) {
-        error = new Error('Please upload an image');
+    const    error = new Error('Please upload an image');
         error.httpStatusCode = 400;
         return error ;
     }else if (typei.indexOf(img.mimetype) === -1){
 
         error = new Error('Please upload file image .jpg, .jpeg or .png ');
-        fs.unlink('.%2Fapp%2Fstorage%2F'+ img.filename , function (err) {
+        fs.unlink('app/storage/'+ img.filename , function (err) {
             if (err) throw err;
             console.log('File deleted! ' +img.filename);
         });

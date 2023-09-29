@@ -1,6 +1,6 @@
 module.exports = function(router){
 
-    const accountcontroller = require('../Controllers/account.controller')
+    const accountcontroller = require('../../Controllers/account.controller')
 
 
 

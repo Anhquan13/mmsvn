@@ -4,6 +4,8 @@ fs = require('fs');
 
 var today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+
 exports.get_list = function(req,res){
     product.get_all(function(data){
         res.send({resutl: data})
@@ -21,14 +23,16 @@ exports.add_product = function(req,res){
     data.cre_date = date;
  //   console.log("name là: ");
     var rep = up.photo(req);
-    console.log("rep la1: "+ rep);
-    if (rep === up.error){
+//    console.log("befor if: "+ up.error);
+
+    if (rep instanceof Error){
+//        console.log("if true: "+ rep);
         res.send(rep.message);
-        console.log("rep la: "+ rep);
-//        console.log('vao ham upload2: '+ rep.message);
-    } else{
-        data.image = '%2Fapp%2Fstorage%2F'+ rep;
-        console.log("rep la:  "+ rep);
+
+        console.log('uploaded '+ rep.message);
+    } else {
+//        data.image = '%2Fapp%2Fstorage%2F'+ rep;
+        console.log("if false:  "+ rep);
         product.create(data, function(temp){
             res.send({resutl: temp})
         })
@@ -67,11 +71,8 @@ exports.update_product = function (req, res){
         })
     }else{
         var rep = up.photo(req);
-        console.log("rep la1: "+ rep);
-        if (rep === up.error){
+        if (rep instanceof Error){
             res.send(rep.message);
-//            console.log("rep la: "+ rep); //test
-//        console.log('vao ham upload2: '+ rep.message);
         } else{
             product.getByid(data.id_product,function (temp){
 //       res.send({resutl: data})
