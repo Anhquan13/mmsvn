@@ -11,6 +11,7 @@ const product = function(){
     this.cre_date = product.cre_date;
     this.edit_date = product.cre_date;
     this.image = product.image;
+    this.brochure = product.brochure;
     this.status = product.status;
     this.id_user = product.id_user;
     this.id_group = product.id_group;
@@ -37,7 +38,7 @@ product.getByid = function(id_product, resutl  ){
 
 product.create = function(data, resutl){
 //    console.log ("tên là: " + data.name);  //kiểm tra bug
-    db.query("INSERT INTO product set name =?, des =?, spec =?, des_en =?,spec_en =?, cre_date =?, edit_date=?,image= ?, status =?, id_user=?, id_group =? ", [data.name, data.des, data.spec, data.des_en, data.spec_en, data.cre_date, data.edit_date,data.image, data.status, data.id_user, data.id_group],function (err,product){
+    db.query("INSERT INTO product set name =?, des =?, spec =?, des_en =?,spec_en =?, cre_date =?, edit_date=?,image= ?, brochure= ?, status =?, id_user=?, id_group =? ", [data.name, data.des, data.spec, data.des_en, data.spec_en, data.cre_date, data.edit_date,data.image, data.brochure ,data.status, data.id_user, data.id_group],function (err,product){
         console.log (err, product);
         if(err){
             resutl("lỗi cmnr ");
@@ -59,7 +60,7 @@ product.remove = function(id_product, resutl){
 }
 
 product.update = function (data, result){
-    db.query ("UPDATE product  SET name= ?, des = ?, spec= ?, des_en=?,spec_en=?, edit_date=?, status =?, id_group=?  WHERE id_product=?", [data.name, data.des, data.spec, data.des_en, data.spec_en, data.edit_date, data.status, data.id_group,parseInt(data.id_product) ],function (err, product) {
+    db.query ("UPDATE product  SET name= ?, des = ?, spec= ?, des_en=?,spec_en=?, edit_date=?, brochure=?, status =?, id_group=?  WHERE id_product=?", [data.name, data.des, data.spec, data.des_en, data.spec_en, data.edit_date, data.brochure ,data.status, data.id_group,parseInt(data.id_product) ],function (err, product) {
         if(err){
             console.log (err);
             result(null);
