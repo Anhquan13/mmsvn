@@ -23,7 +23,7 @@ exports.add_account = function(req,res){
 exports.remove_account = function (req, res){
     var id = req.params.id;
     account.remove(id, function(temp){
-        res.send({result: temp});
+        res.send({results: temp});
     })
 }
 
@@ -41,7 +41,7 @@ exports.login = function (req, res){
             const _token = await JWT.make(response);
             res.send({token: _token, status: true});
         }else{
-            res.send({result: 'Password hoặc tên đăng nhập sai ', status: false});
+            res.send({results: 'Password hoặc tên đăng nhập sai ', status: false});
         }
     })
 }

@@ -4,13 +4,13 @@ fs = require('fs');
 
 exports.get_list = function(req,res){
     customer.get_all(function(data){
-        res.send({result: data})
+        res.send({results: data})
     })
 };
 
 exports.detail = function(req,res){
     customer.getByid(req.params.id, function (data){
-        res.send({result: data})
+        res.send({results: data})
     });
 };
 
@@ -19,16 +19,13 @@ exports.add_customer = function(req,res){
 //    data.cre_date = date;
     //   console.log("name là: ");
     var rep = up.photo(req);
-    console.log("rep la1: "+ rep);
     if (rep instanceof Error){
         res.send(rep.message);
-        console.log("rep la: "+ rep);
-//        console.log('vao ham upload2: '+ rep.message);
     } else{
-        data.image = '%2Fapp%2Fstorage%2F'+ rep;
+        data.image = 'app%2Fstorage%2F'+ rep;
         console.log("rep la:  "+ rep);
         customer.create(data, function(temp){
-            res.send({result: temp})
+            res.send({results: temp})
         })
     }
 
@@ -37,14 +34,14 @@ exports.remove_customer = function (req, res){
     var id = req.params.id;
     var image;
     customer.getByid(req.params.id,function (data){
-//       res.send({result: data})
+//       res.send({results: data})
 //        console.log("data.image =" + data.image);
         image = data.image;
 //        console.log("image 1 = " +image);
     });
 
     customer.remove(id, function(temp){
-        res.send({result: temp});
+        res.send({results: temp});
         console.log("image  = " +image);
         fs.unlink(image , function (err) {
             if (err) throw err;
@@ -60,15 +57,12 @@ exports.update_customer = function (req, res){
     if(data.image==""){
         console.log("update no image");
         customer.update(data, function (temp){
-            res.send({result: temp});
+            res.send({results: temp});
         })
     }else{
         var rep = up.photo(req);
-        console.log("rep la1: "+ rep);
         if (rep instanceof Error){
             res.send(rep.message);
-//            console.log("rep la: "+ rep); //test
-//        console.log('vao ham upload2: '+ rep.message);
         } else{
             customer.getByid(data.id,function (temp){
                 console.log("temp.image =" + temp.image);
@@ -80,10 +74,10 @@ exports.update_customer = function (req, res){
                     catch(err){console.log(err)}
                 });
             });
-            data.image = '%2Fapp%2Fstorage%2F'+ rep;
+            data.image = 'app%2Fstorage%2F'+ rep;
 //            console.log("rep la:  "+ rep); //test
             customer.updateimg(data, function (temp){
-                res.send({result: temp});
+                res.send({results: temp});
             })
         }
         console.log("update image");

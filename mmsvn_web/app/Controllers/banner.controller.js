@@ -6,13 +6,13 @@ var today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 exports.get_list = function(req,res){
     banner.get_all(function(data){
-        res.send({result: data})
+        res.send({results: data})
     })
 };
 
 exports.detail = function(req,res){
     banner.getByid(req.params.id, function (data){
-        res.send({result: data})
+        res.send({results: data})
     });
 };
 /*
@@ -29,7 +29,7 @@ exports.add_banner = function(req,res){
         data.image = 'app/storage/'+ rep;
         console.log("rep la:  "+ rep);
         banner.create(data, function(temp){
-            res.send({result: temp})
+            res.send({results: temp})
         })
     }
 
@@ -39,14 +39,14 @@ exports.remove_banner = function (req, res){
     var id = req.params.id;
     var image;
     banner.getByid(req.params.id,function (data){
-//       res.send({result: data})
+//       res.send({results: data})
 //        console.log("data.image =" + data.image);
         image = data.image;
 //        console.log("image 1 = " +image);
     });
 
     banner.remove(id, function(temp){
-        res.send({result: temp});
+        res.send({results: temp});
         console.log("image  = " +image);
         fs.unlink(image , function (err) {
             if (err) throw err;
@@ -92,7 +92,7 @@ exports.update_banner = function (req, res){
             data.link = 'app%2Fstorage%2F'+ rep;
 //            console.log("rep la:  "+ rep); //test
             banner.update(data, function (temp){
-                res.send({result: temp});
+                res.send({results: temp});
             })
         }
 

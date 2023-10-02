@@ -5,6 +5,6 @@ fs = require('fs');
 
 exports.get_list = function(req,res){
     about_us.get_all(function(data){
-        res.send({result: data })
+        res.send({results: data })
     })
 };
