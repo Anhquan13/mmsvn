@@ -6,13 +6,13 @@ var today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 exports.get_list = function(req,res){
     banner.get_all(function(data){
-        res.send({resutl: data})
+        res.send({result: data})
     })
 };
 
 exports.detail = function(req,res){
     banner.getByid(req.params.id, function (data){
-        res.send({resutl: data})
+        res.send({result: data})
     });
 };
 /*
@@ -29,7 +29,7 @@ exports.add_banner = function(req,res){
         data.image = 'app/storage/'+ rep;
         console.log("rep la:  "+ rep);
         banner.create(data, function(temp){
-            res.send({resutl: temp})
+            res.send({result: temp})
         })
     }
 
@@ -39,7 +39,7 @@ exports.remove_banner = function (req, res){
     var id = req.params.id;
     var image;
     banner.getByid(req.params.id,function (data){
-//       res.send({resutl: data})
+//       res.send({result: data})
 //        console.log("data.image =" + data.image);
         image = data.image;
 //        console.log("image 1 = " +image);
@@ -73,15 +73,26 @@ exports.update_banner = function (req, res){
                 console.log("temp.link =" + temp.link);
                 image = temp.link;
 //        console.log("image 1 = " +image);
-                fs.unlink(image , function (err) {
-                    try{ console.log(image + " ko có trong db");}
-                    catch {console.log('File deleted!');}
-                });
+                try {
+                    fs.unlink(image, function (err) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('File deleted!');
+                        }
+                    });
+                } catch (err) {
+                    if (err.code === 'ENOENT') {
+                        console.log('File not found');
+                    } else {
+                        throw err;
+                    }
+                }
             });
             data.link = 'app%2Fstorage%2F'+ rep;
 //            console.log("rep la:  "+ rep); //test
             banner.update(data, function (temp){
-                res.send({resutl: temp});
+                res.send({result: temp});
             })
         }
 

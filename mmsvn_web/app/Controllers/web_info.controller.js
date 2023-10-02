@@ -2,13 +2,13 @@ const webinf = require('../Models/web_info.model');
 
 exports.get_list = function(req,res){
     webinf.get_all(function(data){
-        res.send({resutl: data})
+        res.send({result: data})
     })
 };
 
 exports.detail = function(req,res){
     webinf.getByid(req.params.id, function (data){
-        res.send({resutl: data})
+        res.send({result: data})
     });
 };
 /*
@@ -25,7 +25,7 @@ exports.add_webinf = function(req,res){
         data.image = 'app/storage/'+ rep;
         console.log("rep la:  "+ rep);
         webinf.create(data, function(temp){
-            res.send({resutl: temp})
+            res.send({result: temp})
         })
     }
 
@@ -35,7 +35,7 @@ exports.remove_webinf = function (req, res){
     var id = req.params.id;
     var image;
     webinf.getByid(req.params.id,function (data){
-//       res.send({resutl: data})
+//       res.send({result: data})
 //        console.log("data.image =" + data.image);
         image = data.image;
 //        console.log("image 1 = " +image);
@@ -55,6 +55,6 @@ exports.remove_webinf = function (req, res){
 exports.update_webinf = function (req, res){
     var data = req.body;
     webinf.update(data, function (temp){
-        res.send({resutl: temp});
+        res.send({result: temp});
     })
 }

@@ -10,14 +10,14 @@ module.exports = function(router){
     router.get('/post/list', postcontroller.get_list);
 
     router.get('/post/detail/:id', postcontroller.detail);
+/* just admin can edit add or delete post
 
     router.post('/post/add',upload.single('image'), postcontroller.add_post);
 
     router.delete('/post/delete/:id', postcontroller.remove_post);
 
     router.put('/post/update/', upload.single('image'), postcontroller.update_post);
-    
-    
+ */
 
 
 

@@ -16,9 +16,5 @@ module.exports = function(router){
     router.delete('/post/delete/:id', postcontroller.remove_post);
 
     router.put('/post/update/', upload.single('image'), postcontroller.update_post);
-    
-    
-
-
 
 };

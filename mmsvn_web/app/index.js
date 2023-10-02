@@ -12,14 +12,15 @@ app.use(function (req, res, next){
 })
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+require('./Routes/Guest/about.router')(app);
+require('./Routes/admin/account.router')(app);
 require('./Routes/admin/banner.router')(app);
 require('./Routes/admin/web_info.router')(app);
 require('./Routes/admin/post.router')(app);
 require('./Routes/admin/sub_pr.router')(app);
 require('./Routes/admin/readfile_router')(app);
 require('./Routes/admin/customer.router')(app);
-
-require('./Routes/admin/account.router')(app);
 require('./Routes/admin/group_pr.router')(app);
 require('./Routes/admin/product.router')(app);
 console.log('Ready for new challenges');

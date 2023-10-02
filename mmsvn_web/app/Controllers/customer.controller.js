@@ -4,13 +4,13 @@ fs = require('fs');
 
 exports.get_list = function(req,res){
     customer.get_all(function(data){
-        res.send({resutl: data})
+        res.send({result: data})
     })
 };
 
 exports.detail = function(req,res){
     customer.getByid(req.params.id, function (data){
-        res.send({resutl: data})
+        res.send({result: data})
     });
 };
 
@@ -28,7 +28,7 @@ exports.add_customer = function(req,res){
         data.image = '%2Fapp%2Fstorage%2F'+ rep;
         console.log("rep la:  "+ rep);
         customer.create(data, function(temp){
-            res.send({resutl: temp})
+            res.send({result: temp})
         })
     }
 
@@ -37,7 +37,7 @@ exports.remove_customer = function (req, res){
     var id = req.params.id;
     var image;
     customer.getByid(req.params.id,function (data){
-//       res.send({resutl: data})
+//       res.send({result: data})
 //        console.log("data.image =" + data.image);
         image = data.image;
 //        console.log("image 1 = " +image);
@@ -60,7 +60,7 @@ exports.update_customer = function (req, res){
     if(data.image==""){
         console.log("update no image");
         customer.update(data, function (temp){
-            res.send({resutl: temp});
+            res.send({result: temp});
         })
     }else{
         var rep = up.photo(req);
@@ -83,7 +83,7 @@ exports.update_customer = function (req, res){
             data.image = '%2Fapp%2Fstorage%2F'+ rep;
 //            console.log("rep la:  "+ rep); //test
             customer.updateimg(data, function (temp){
-                res.send({resutl: temp});
+                res.send({result: temp});
             })
         }
         console.log("update image");

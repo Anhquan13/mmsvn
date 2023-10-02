@@ -9,14 +9,14 @@ module.exports = function(router){
     router.get('/product/list', productcontroller.get_list);
 
     router.get('/product/detail/:id', productcontroller.detail);
-
+/* just admin
     router.post('/product/add',upload.single('image'), productcontroller.add_product);
 
     router.delete('/product/delete/:id', productcontroller.remove_product);
 
     router.put('/product/update/', upload.single('image'), productcontroller.update_product);
     
-    
+    */
 
 
 

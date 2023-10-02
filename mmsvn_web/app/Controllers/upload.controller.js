@@ -32,6 +32,6 @@ exports.photo = function (req){
         error.httpStatusCode = 401;
         return error;
     }
-    console.log("upload duoc roi ne  " + img.filename)    ;
+    console.log("upload duoc roi ne " + img.filename)    ;
     return img.filename;
 }

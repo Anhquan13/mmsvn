@@ -6,13 +6,13 @@ var today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 exports.get_list = function(req,res){
     sub.get_all(function(data){
-        res.send({resutl: data})
+        res.send({result: data})
     })
 };
 
 exports.detail = function(req,res){
     sub.getByid(req.params.id, function (data){
-        res.send({resutl: data})
+        res.send({result: data})
     });
 };
 
@@ -30,7 +30,7 @@ exports.add_sub = function(req,res){
         data.image = '%2Fapp%2Fstorage%2F'+ rep;
         console.log("rep la:  "+ rep);
         sub.create(data, function(temp){
-            res.send({resutl: temp})
+            res.send({result: temp})
         })
     }
 
@@ -39,7 +39,7 @@ exports.remove_sub = function (req, res){
     var id = req.params.id;
     var image;
     sub.getByid(req.params.id,function (data){
-//       res.send({resutl: data})
+//       res.send({result: data})
 //        console.log("data.image =" + data.image);
         image = data.image;
 //        console.log("image 1 = " +image);
@@ -47,11 +47,22 @@ exports.remove_sub = function (req, res){
 
     sub.remove(id, function(temp){
         res.send({result: temp});
-        console.log("image  = " +image);
-        fs.unlink(image , function (err) {
-            if (err) throw err;
-            console.log('File deleted!');
-        });
+//        console.log("image  = " +image);
+        try {
+            fs.unlink(image, function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('File deleted!');
+                }
+            });
+        } catch (err) {
+            if (err.code === 'ENOENT') {
+                console.log('File not found');
+            } else {
+                throw err;
+            }
+        }
     })
 
 }
@@ -63,7 +74,7 @@ exports.update_sub = function (req, res){
     if(data.image==""){
         console.log("update no image");
         sub.update(data, function (temp){
-            res.send({resutl: temp});
+            res.send({result: temp});
         })
     }else{
         var rep = up.photo(req);
@@ -73,20 +84,30 @@ exports.update_sub = function (req, res){
 //        console.log('vao ham upload2: '+ rep.message);
         } else{
             sub.getByid(data.id_sub,function (temp){
-//       res.send({resutl: data})
+//       res.send({result: data})
                 console.log("temp.image =" + temp.image);
                 image = temp.image;
 //                console.log("image 1 = " +image);
-                fs.unlink(image , function (err) {
-                    try{
-                        console.log('File deleted!');}
-                    catch(err){console.log(err)}
-                });
+                try {
+                    fs.unlink(image, function (err) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('File deleted!');
+                        }
+                    });
+                } catch (err) {
+                    if (err.code === 'ENOENT') {
+                        console.log('File not found');
+                    } else {
+                        throw err;
+                    }
+                }
             });
             data.image = '%2Fapp%2Fstorage%2F'+ rep;
 //            console.log("rep la:  "+ rep); //test
             sub.updateimg(data, function (temp){
-                res.send({resutl: temp});
+                res.send({result: temp});
             })
         }
         console.log("update image");
