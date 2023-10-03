@@ -21,14 +21,13 @@ exports.add_post = function(req,res){
     data.cre_date = date;
     //   console.log("name là: ");
     var rep = up.photo(req);
-    console.log("rep la1: "+ rep);
+
     if (rep instanceof Error){
         res.send(rep.message);
-        console.log("rep la: "+ rep);
+
 
     } else{
-        data.image = '%2Fapp%2Fstorage%2F'+ rep;
-        console.log("rep la2: ");
+        data.image = 'source: %2Fapp%2Fstorage%2F'+ rep;
         post.create(data, function(temp){
             res.send({results: temp})
         })

@@ -56,11 +56,13 @@ webinf.remove = function(id, resutl){
 */
 webinf.update = function (data, result){
     try {
-        const webinfData = db.query("UPDATE  web_inf SET adress= ?, adress_en =?, phone_num=?, email=?, link1=?,link2=?,link3=? WHERE id=?", [data.address, data.address_en, data.phone_num, data.email, data.link1, data.link2, data.link3, data.id]);
-        if (webinfData.error) {
-            throw webinfData.error;
-        }
-        result(null);
+        const webinfData = db.query("UPDATE  web_inf SET adress= ?, adress_en =?, phone_num=?, email=?, link1=?,link2=?,link3=? WHERE id=?", [data.address, data.address_en, data.phone_num, data.email, data.link1, data.link2, data.link3, data.id], function (err,webinf){
+            if (webinfData.error) {
+                throw webinfData.error;
+            }
+            result({data});
+        });
+
     } catch (err) {
         console.log(err);
         result({ error: err });

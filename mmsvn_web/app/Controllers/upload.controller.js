@@ -14,9 +14,7 @@ exports.single = function (req){
 
 exports.photo = function (req){
     var img = req.file;
-    console.log('vao ham upload: ');
     var typei = ['image/png', 'image/jpg', 'image/jpeg'];
-    console.log('vao ham upload2: ');
     if (!img) {
     const    error = new Error('Please upload an image');
         error.httpStatusCode = 400;
@@ -32,6 +30,5 @@ exports.photo = function (req){
         error.httpStatusCode = 401;
         return error;
     }
-    console.log("upload duoc roi ne " + img.filename)    ;
     return img.filename;
 }

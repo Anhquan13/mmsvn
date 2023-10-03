@@ -7,7 +7,7 @@ const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 
 exports.get_list = function(req,res){
-    product.get_all(function(data){z
+    product.get_all(function(data){
         res.send({results: data})
     })
 };
