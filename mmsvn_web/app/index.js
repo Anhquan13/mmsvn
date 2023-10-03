@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 require('./Routes/Guest/about.router')(app);
 require('./Routes/admin/account.router')(app);
 require('./Routes/admin/banner.router')(app);
-require('./Routes/admin/web_info.router')(app);
+require('./Routes/admin/web_inf.router')(app);
 require('./Routes/admin/post.router')(app);
 require('./Routes/admin/sub_pr.router')(app);
 require('./Routes/admin/readfile_router')(app);

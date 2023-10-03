@@ -2,8 +2,10 @@ db = require('../common/connect');
 
 const webinf = function(){
     this.id = webinf.id;
-    this.head_office = webinf.head_office;
-    this.Vungtau_office = webinf.Vungtau_office;
+    this.address = webinf.address;
+    this.address_en = webinf.address_en;
+    this.phone_num = webinf.phone_num;
+    this.email = webinf.email;
     this.link1 = webinf.link1;
     this.link2 = webinf.link2;
     this.link3 = webinf.link3
@@ -11,7 +13,7 @@ const webinf = function(){
 
 webinf.get_all = function(resutl){
 
-    db.query("select * from web_info", function (err,webinf){
+    db.query("select * from web_inf", function (err,webinf){
         if(err){
             resutl("hêloojfd");
         }
@@ -20,7 +22,7 @@ webinf.get_all = function(resutl){
 }
 webinf.getByid = function(id, resutl  ){
     console.log(id);
-    db.query("select * from web_info where id = ?",id,function (err,webinf){
+    db.query("select * from web_inf where id = ?",id,function (err,webinf){
         console.log (err,webinf);
         if(err|| webinf.length==0){
             resutl("hêlofojcfd");
@@ -53,16 +55,17 @@ webinf.remove = function(id, resutl){
 }
 */
 webinf.update = function (data, result){
-    db.query ("UPDATE web_info SET head_office= ?, Vung_tau_office =?, link1=?,link2=?,link3=? WHERE id=?", [data.head_office, data.Vungtau_office, data.link1, data.link2, data.link3 ,data.id ],function (err, webinf) {
-        console.log (err);
-        try{
-            result(null);
+    try {
+        const webinfData = db.query("UPDATE  web_inf SET adress= ?, adress_en =?, phone_num=?, email=?, link1=?,link2=?,link3=? WHERE id=?", [data.address, data.address_en, data.phone_num, data.email, data.link1, data.link2, data.link3, data.id]);
+        if (webinfData.error) {
+            throw webinfData.error;
         }
-        catch {
-            result({data})
-        }
-    })
-}
+        result(null);
+    } catch (err) {
+        console.log(err);
+        result({ error: err });
+    }
+};
 
 
 

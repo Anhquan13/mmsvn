@@ -1,4 +1,5 @@
-const webinf = require('../Models/web_info.model');
+const webinf = require('../Models/web_inf.model');
+
 
 exports.get_list = function(req,res){
     webinf.get_all(function(data){
