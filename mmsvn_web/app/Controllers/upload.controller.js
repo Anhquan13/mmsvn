@@ -16,7 +16,7 @@ exports.photo = function (req){
     var img = req.file;
     var typei = ['image/png', 'image/jpg', 'image/jpeg'];
     if (!img) {
-    const    error = new Error('Please upload an image');
+        const    error = new Error('Please upload an image');
         error.httpStatusCode = 400;
         return error ;
     }else if (typei.indexOf(img.mimetype) === -1){

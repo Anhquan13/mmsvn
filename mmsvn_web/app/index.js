@@ -8,8 +8,12 @@ const _AuthMiddleWare = require('./common/_AuthMiddleWare');
 
 app.use(function (req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    if(req.method === 'OPTIONS'){
+        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        return res.status(200).json({});
+    }
+
     next();
 })
 app.use(bodyParser.urlencoded({extended: false}));
@@ -26,6 +30,7 @@ require('./Routes/Guest/customer.router')(app);
 require('./Routes/Guest/group_pr.router')(app);
 require('./Routes/Guest/product.router')(app);
 require('./Routes/readfile_router')(app);
+require('./Routes/refresh.router')(app);
 app.use(_AuthMiddleWare.isAuth);
 require('./Routes/admin/about.router')(app);
 require('./Routes/admin/account.router')(app);

@@ -117,41 +117,4 @@ exports.update_product = function (req, res){
 
 }
 
-exports.update_product = function (req, res){
-    var data = req.body;
-    console.log("hello " + data.id_product);
-    data.edit_date = date;
-    if(data.image==""){
-        console.log("update no image");
-        product.update(data, function (temp){
-            res.send({results: temp});
-        })
-    }else{
-        var rep = up.photo(req);
-        if (rep instanceof Error){
-            res.send(rep.message);
-        } else{
-            product.getByid(data.id_product,function (temp){
-//       res.send({results: data})
-                console.log("temp.id= " + data.id_product);
-                console.log("temp.image =" + temp.image);
-                image = temp.image;
-//                console.log("image 1 = " +image);
-                fs.unlink(image , function (err) {
-                    try{
-                        console.log('File deleted! ');}
-                    catch(err){console.log(err)}
-                });
-            });
-            data.image = 'app%2Fstorage%2F'+ rep;
-//            console.log("rep la:  "+ rep); //test
-            product.updateimg(data, function (temp){
-                res.send({results: temp});
-            })
-        }
-        console.log("update image");
-
-    }
-
-}
 

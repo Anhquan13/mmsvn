@@ -1,0 +1,7 @@
+const REFRESH_TOKEN = "MMSWEBSITE";
+const R_TOKEN_TIME_LIFE = "8h";
+
+module.exports= {
+    REFRESH_TOKEN: REFRESH_TOKEN,
+    R_TOKEN_TIME_LIFE: R_TOKEN_TIME_LIFE,
+}

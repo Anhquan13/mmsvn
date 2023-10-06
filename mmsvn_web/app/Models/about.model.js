@@ -1,6 +1,7 @@
 const db = require('../common/connect');
 
 const about_us = function(){
+    this.id = about_us.id;
     this.content = about_us.content;
     this.content_en = about_us.content_en;
     this.image1 = about_us.image1;
@@ -18,6 +19,33 @@ about_us.get_all = function(resutl){
         }
         else     resutl(about_us);
     });
+}
+
+about_us.update = function (data, result){
+    db.query ("UPDATE about_us  SET content =? , conten_en= ?  WHERE id= 0", [data.content, data.content_en],function (err, about_us) {
+        if(err){
+            console.log (err);
+            result(null);
+
+        }
+        else {
+            console.log("update thanh cong");
+            result({data})
+        }
+    })
+}
+
+about_us.updateimg = function (data, result){
+    db.query ("UPDATE about_us  SET content =? , conten_en= ?, image1=?, image2 =?,image3 =?  WHERE id= 0", [data.content, data.content_en, data.image1, data.image2, data.image3],function (err, about_us) {
+        if(err){
+            console.log (err);
+            result(null);
+        }
+        else {
+            console.log("update thanh cong");
+            result({data})
+        }
+    })
 }
 
 module.exports = about_us;

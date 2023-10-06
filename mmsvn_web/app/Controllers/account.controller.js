@@ -39,7 +39,8 @@ exports.login = function (req, res){
     account.check_login(data, async function (response){
         if(response){
             const _token = await JWT.make(response);
-            res.send({token: _token, status: true});
+            const _rtoken = await JWT.rt_make(response);
+            res.send({token: _token, refresh_token : _rtoken, status: true});
         }else{
             res.send({results: 'Password hoặc tên đăng nhập sai ', status: false});
         }
