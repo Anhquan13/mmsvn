@@ -110,3 +110,17 @@ exports.update_post = function (req, res){
 
 }
 
+exports.add_image = function(req,res){
+    var data = req.body;
+    //   console.log("name là: ");
+    var rep = up.upload_post(req);
+
+    if (rep instanceof Error){
+        res.send(rep.message);
+
+
+    } else{
+            res.send({url: rep})
+    }
+
+}

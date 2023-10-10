@@ -1,6 +1,7 @@
 module.exports = function(router){
 
-    const postcontroller = require('../../Controllers/post.controller')
+    const postcontroller = require('../../Controllers/post.controller');
+//    const uploadcontroller = require('../../Controllers/upload.controller');
     upload = require('../../common/SaveFile');
     fs = require('fs');
 
@@ -12,6 +13,8 @@ module.exports = function(router){
     router.get('/post/detail/:id', postcontroller.detail);
 
     router.post('/post/add',upload.single('image'), postcontroller.add_post);
+
+    router.post('/post/upimg', upload.single('image'), postcontroller.add_image);
 
     router.delete('/post/delete/:id', postcontroller.remove_post);
 
