@@ -11,13 +11,14 @@ const about_us = function(){
 
 }
 
-about_us.get_all = function(resutl){
+about_us.get_about = function(resutl){
 
-    db.query("select * from about_us", function (err,about_us){
-        if(err){
-            resutl("err ");
+    db.query("select * from about_us where  id =0 ", function (err, about_us){
+        console.log (err,about_us);
+        if(err|| about_us.length==0){
+            resutl("hêlofojcfd");
         }
-        else     resutl(about_us);
+        else     resutl (about_us[0]);
     });
 }
 

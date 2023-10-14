@@ -31,7 +31,7 @@ exports.add_product = function(req,res){
 
         console.log('uploaded '+ rep.message);
     } else {
-//        data.image = '%2Fapp%2Fstorage%2F'+ rep;
+        data.image = '%2Fapp%2Fstorage%2F'+ rep;
         console.log("if false:  "+ rep);
         product.create(data, function(temp){
             res.send({results: temp})
@@ -77,7 +77,7 @@ exports.update_product = function (req, res){
     if(data.image==""){
         console.log("update no image");
         product.update(data, function (temp){
-            res.send({resutl: temp});
+            res.send({resutl: "update successfully"});
         })
     }else{
         var rep = up.photo(req);

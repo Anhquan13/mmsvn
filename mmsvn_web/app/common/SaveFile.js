@@ -9,7 +9,9 @@ const storage = multer.diskStorage({
         res(null, Date.now()+ file.originalname)
         return this.filename
     }
+
 });
 // Khai báo đối tượng multer
 var upload = multer({storage: storage})
 module.exports = upload;
+

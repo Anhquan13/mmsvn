@@ -41,7 +41,7 @@ product.create = function(data, resutl){
     db.query("INSERT INTO product set name =?, des =?, spec =?, des_en =?,spec_en =?, cre_date =?, edit_date=?,image= ?, brochure= ?, status =?, id_user=?, id_group =? ", [data.name, data.des, data.spec, data.des_en, data.spec_en, data.cre_date, data.edit_date,data.image, data.brochure ,data.status, data.id_user, data.id_group],function (err,product){
         console.log (err, product);
         if(err){
-            resutl("lỗi cmnr ");
+            resutl(err);
         } else resutl({data});
         console.log (err);
     })
@@ -67,7 +67,7 @@ product.update = function (data, result){
 
         }
         else {
-            console.log("update thanh cong");
+            console.log("update successfully");
             result({data})
         }
     })
@@ -80,7 +80,7 @@ product.updateimg = function (data, result){
             result(null);
         }
         else {
-            console.log("update thanh cong");
+            console.log("update successfully");
             result({data})
         }
     })

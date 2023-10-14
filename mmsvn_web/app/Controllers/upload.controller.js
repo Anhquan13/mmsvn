@@ -33,8 +33,8 @@ exports.photo = function (req){
     return img.filename;
 }
 
-exports.upload_post = function (req){
-    var img = req.file;
+exports.upload_post = function (img){
+//    var img = req.file;
     var typei = ['image/png', 'image/jpg', 'image/jpeg'];
     if (!img) {
         const    error = new Error('Please upload an image');
