@@ -36,7 +36,7 @@ exports.remove_customer = function (req, res){
     customer.getByid(req.params.id,function (data){
 //       res.send({results: data})
 //        console.log("data.image =" + data.image);
-        image = data.image;
+        image = data.image.replace(/%2F/g, '/');
 //        console.log("image 1 = " +image);
     });
 
@@ -66,7 +66,7 @@ exports.update_customer = function (req, res){
         } else{
             customer.getByid(data.id,function (temp){
                 console.log("temp.image =" + temp.image);
-                image = temp.image;
+                image = temp.image.replace(/%2F/g, '/');
 //                console.log("image 1 = " +image);
                 fs.unlink(image , function (err) {
                     try{

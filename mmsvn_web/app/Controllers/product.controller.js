@@ -45,7 +45,7 @@ exports.remove_product = function (req, res){
     product.getByid(req.params.id,function (data){
 //       res.send({results: data})
 //        console.log("data.image =" + data.image);
-        image = data.image;
+        image = data.image.replace(/%2F/g, '/');
 //        console.log("image 1 = " +image);
     });
 
@@ -87,7 +87,7 @@ exports.update_product = function (req, res){
             product.getByid(data.id_product,function (temp){
 //       res.send({resutl: data})
                 console.log("temp.image =" + temp.image);
-                image = temp.image;
+                image = temp.image.replace(/%2F/g, '/');
 //                console.log("image 1 = " +image);
                 try {
                     fs.unlink(image, function (err) {

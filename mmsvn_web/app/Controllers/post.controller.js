@@ -27,7 +27,7 @@ exports.add_post = function(req,res){
 
 
     } else{
-        data.image = 'source: %2Fapp%2Fstorage%2F'+ rep;
+        data.image = '%2Fapp%2Fstorage%2F'+ rep;
         post.create(data, function(temp){
             res.send({results: temp})
         })
@@ -40,7 +40,7 @@ exports.remove_post = function (req, res){
     post.getByid(req.params.id,function (data){
 //       res.send({results: data})
 //        console.log("data.image =" + data.image);
-        image = data.image;
+        image = data.image.replace(/%2F/g, '/');
 //        console.log("image 1 = " +image);
     });
 
@@ -82,7 +82,7 @@ exports.update_post = function (req, res){
         } else{   //update co image
             post.getByid(data.id_post,function (temp){
                 console.log("temp.image =" + temp.image);
-                image = temp.image;
+                image = temp.image.replace(/%2F/g, '/');
                 try {
                     fs.unlink(image, function (err) {
                         if (err) {

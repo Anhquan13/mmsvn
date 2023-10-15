@@ -5,5 +5,5 @@ module.exports = function(router) {
 
     router.get('/about-us/', aboutcontroller.get_about);
 
-    router.put('/about/update/',upload.array(['image1', 'image2', 'image3']), aboutcontroller.update_about);
+    router.put('/about/update/',upload.fields([{name:'image1', maxCount: 1}, {name:'image2', maxCount: 1}, {name:'image3', maxCount: 1}]), aboutcontroller.update_about);
 }

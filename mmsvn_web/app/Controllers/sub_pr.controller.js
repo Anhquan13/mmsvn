@@ -41,7 +41,7 @@ exports.remove_sub = function (req, res){
     sub.getByid(req.params.id,function (data){
 //       res.send({results: data})
 //        console.log("data.image =" + data.image);
-        image = data.image;
+        image = data.image.replace(/%2F/g, '/');
 //        console.log("image 1 = " +image);
     });
 
@@ -86,7 +86,7 @@ exports.update_sub = function (req, res){
             sub.getByid(data.id_sub,function (temp){
 //       res.send({results: data})
                 console.log("temp.image =" + temp.image);
-                image = temp.image;
+                image = temp.image.replace(/%2F/g, '/');
 //                console.log("image 1 = " +image);
                 try {
                     fs.unlink(image, function (err) {

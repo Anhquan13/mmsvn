@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
+require('./Routes/mail.router')(app);
 require('./Routes/Guest/about.router')(app);
 require('./Routes/Guest/account.router')(app);
 require('./Routes/Guest/banner.router')(app);
@@ -29,7 +30,7 @@ require('./Routes/Guest/sub_pr.router')(app);
 require('./Routes/Guest/customer.router')(app);
 require('./Routes/Guest/group_pr.router')(app);
 require('./Routes/Guest/product.router')(app);
-require('./Routes/readfile_router')(app);
+require('./Routes/readfile.router')(app);
 require('./Routes/refresh.router')(app);
 app.use(_AuthMiddleWare.isAuth);
 require('./Routes/admin/about.router')(app);

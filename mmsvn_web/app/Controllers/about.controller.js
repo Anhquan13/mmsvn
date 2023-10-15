@@ -13,11 +13,11 @@ exports.update_about = function (req, res){
     console.log("hello ");
     var data = req.body;
 //    const files = this.req.file('image1');
-    const files = req.file;
-    console.log("file lenght: "+ files.length);
-    const image1 = files[0];
-    const image2 = files[1];
-    const image3 = files[2];
+    const files = req.files;
+//    console.log("file lenght: "+ files.length);
+    const image1 = req.files.image1[0];
+    const image2 = req.files.image2[0];
+    const image3 = req.files.image3[0];
 //    data.edit_date = date;
     if(data.image1==""){
         console.log("update no image");
@@ -31,12 +31,12 @@ exports.update_about = function (req, res){
         if (rep1 instanceof Error || rep2 instanceof Error || rep3 instanceof Error){
             res.send("There are somes error, please update again");
         } else{
-            product.get_about(function (temp){
+            about_us.get_about(function (temp){
 //       res.send({resutl: data})
                 console.log("temp.image =" + temp.image);
-                img1 = temp.image1;
-                img2 = temp.image2;
-                img3 = temp.image3;
+                img1 = temp.image1.replace(/%2F/g, '/');
+                img2 = temp.image2.replace(/%2F/g, '/');
+                img3 = temp.image3.replace(/%2F/g, '/');
 //                console.log("image 1 = " +image);
                 try {
                     fs.unlink(img1, function (err) {
@@ -69,9 +69,11 @@ exports.update_about = function (req, res){
                 }
             });
             data.image1 = 'app%2Fstorage%2F'+ rep1;
+            data.image2 = 'app%2Fstorage%2F'+ rep2;
+            data.image3 = 'app%2Fstorage%2F'+ rep3;
 
 //            console.log("rep la:  "+ rep); //test
-            product.updateimg(data, function (temp){
+            about_us.updateimg(data, function (temp){
                 res.send({resutl: temp});
             })
         }
