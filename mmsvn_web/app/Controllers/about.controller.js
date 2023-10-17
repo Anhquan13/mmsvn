@@ -10,18 +10,25 @@ exports.get_about = function(req,res){
 };
 
 exports.update_about = function (req, res){
-    console.log("hello ");
-    var data = req.body;
+//    console.log("hello ");
+
+        var data = req.body;
 //    const files = this.req.file('image1');
     const files = req.files;
+    if (!Array.isArray(files.image1)) {
+        files.image1 = [];
+        files.image2 = [];
+        files.image3 = [];
+    }
 //    console.log("file lenght: "+ files.length);
     const image1 = req.files.image1[0];
     const image2 = req.files.image2[0];
     const image3 = req.files.image3[0];
-//    data.edit_date = date;
+
+
     if(data.image1==""){
         console.log("update no image");
-        product.update(data, function (temp){
+        about_us.update(data, function (temp){
             res.send({resutl: temp});
         })
     }else{

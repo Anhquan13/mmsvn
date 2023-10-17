@@ -23,7 +23,7 @@ about_us.get_about = function(resutl){
 }
 
 about_us.update = function (data, result){
-    db.query ("UPDATE about_us  SET content =? , conten_en= ?  WHERE id= 0", [data.content, data.content_en],function (err, about_us) {
+    db.query ("UPDATE about_us  SET content =? , content_en= ?  WHERE id= 0", [data.content, data.content_en],function (err, about_us) {
         if(err){
             console.log (err);
             result(null);

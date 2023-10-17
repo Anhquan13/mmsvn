@@ -51,7 +51,7 @@ exports.upload_post = function (img){
         error.httpStatusCode = 401;
         return error;
     }
-    return 'app/storage/'+ img.filename;
+    return img.filename;
 }
 
 
