@@ -32,15 +32,13 @@ exports.update_about = function (req, res){
             res.send({resutl: temp});
         })
     }else{
-        var rep1 = up.upload_post(image1);
-        var rep2 = up.upload_post(image2);
-        var rep3 = up.upload_post(image3);
+        var rep1 = up.upload_about(image1);
+        var rep2 = up.upload_about(image2);
+        var rep3 = up.upload_about(image3);
         if (rep1 instanceof Error || rep2 instanceof Error || rep3 instanceof Error){
             res.send("There are somes error, please update again");
         } else{
             about_us.get_about(function (temp){
-//       res.send({resutl: data})
-                console.log("temp.image =" + temp.image);
                 img1 = temp.image1.replace(/%2F/g, '/');
                 img2 = temp.image2.replace(/%2F/g, '/');
                 img3 = temp.image3.replace(/%2F/g, '/');
