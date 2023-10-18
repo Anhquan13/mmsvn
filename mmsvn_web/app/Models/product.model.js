@@ -74,12 +74,14 @@ product.update = function (data, result){
 
 product.updateimg = function (data, result){
     db.query ("UPDATE product  SET name= ?, des = ?, spec= ?, des_en=?,spec_en=?, edit_date=?, image =?, status =?, id_group=?  WHERE id_product=?", [data.name, data.des, data.spec, data.des_en, data.spec_en, data.edit_date, data.image , data.status, data.id_group,parseInt(data.id_product) ],function (err, product) {
-        try{
-            result({status: "success", msg: "Update thành công", new_product: data});
-        } catch(err){
+        if(err){
+            console.log (err);
             result({status: "failed", msg: "Update không thành công"});
-            console.log ("bug again!! "+ err );}
-
+        }
+        else {
+            console.log("update successfully");
+            result({status: "success", msg: "Update thành công"})
+        }
     });
 }
 

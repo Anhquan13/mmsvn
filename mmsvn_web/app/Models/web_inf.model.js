@@ -1,6 +1,6 @@
 db = require('../common/connect');
 
-const webinf = function(){
+const webinf = function () {
     this.id = webinf.id;
     this.address = webinf.address;
     this.address_en = webinf.address_en;
@@ -11,23 +11,21 @@ const webinf = function(){
     this.link3 = webinf.link3
 }
 
-webinf.get_all = function(resutl){
+webinf.get_all = function (resutl) {
 
-    db.query("select * from web_inf", function (err,webinf){
-        if(err){
+    db.query("select * from web_inf", function (err, webinf) {
+        if (err) {
             resutl({status: "success", msg: "Khong co infomation"});
-        }
-        else     resutl(webinf);
+        } else resutl(webinf);
     });
 }
-webinf.getByid = function(id, resutl  ){
+webinf.getByid = function (id, resutl) {
     console.log(id);
-    db.query("select * from web_inf where id = ?",id,function (err,webinf){
-        console.log (err,webinf);
-        if(err|| webinf.length==0){
+    db.query("select * from web_inf where id = ?", id, function (err, webinf) {
+        console.log(err, webinf);
+        if (err || webinf.length == 0) {
             resutl({status: "success", msg: "Khong co thong tin nay"});
-        }
-        else     resutl ( webinf[0]);
+        } else resutl(webinf[0]);
     });
 }
 /* webinf ko có update hay remove, chinh sưa 5 bức hinh cũ thôi
@@ -54,22 +52,21 @@ webinf.remove = function(id, resutl){
     })
 }
 */
-webinf.update = function (data, result){
-    try {
-        const webinfData = db.query("UPDATE web_inf SET adress= ?, adress_en =?, phone_num=?, email=?, link1=?,link2=?,link3=? WHERE id=?", [data.adress, data.adress_en, data.phone_num, data.email, data.link1, data.link2, data.link3, data.id], function (err, webinf){
-            if (webinfData.error) {
-                throw webinfData.error;
-            }
+//------------------------------------------
+webinf.update = function (data, result) {
+    db.query("UPDATE web_inf SET adress= ?, adress_en =?, phone_num=?, email=?, link1=?,link2=?,link3=? WHERE id=?", [data.adress, data.adress_en, data.phone_num, data.email, data.link1, data.link2, data.link3, data.id], function (err, webinf) {
+        if (err) {
+            console.log(err);
+            result({status: "failed", msg: "Update không thành công"});
+        } else {
             result({status: "success", msg: "Update thành công"});
+//                console.log (err);
 //            console.log(webinfData); // fixed
-        });
+        }
 
-    } catch (err) {
-        console.log(err);
-        result({status: "failed", msg: "Update không thành công", error: err });
-    }
+    });
+
 };
-
 
 
 module.exports = webinf;

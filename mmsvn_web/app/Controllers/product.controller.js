@@ -75,7 +75,6 @@ exports.update_product = async function (req, res){
     console.log("hello " + data.id_product);
     data.edit_date = date;
 
-    var temp;
     if(data.image==""){
 
         console.log("update no image");
@@ -83,19 +82,13 @@ exports.update_product = async function (req, res){
             res.send({temp});
         })
     }else{
-
         var rep = up.photo(req);
         if (rep instanceof Error){
             res.send(rep.message);
         } else {
-            var i = true;
-             product.getByid(data.id_product, await  function (temp) {
+            await  product.getByid(data.id_product, function (temp) {
                 if (temp.err === "error") {
                     console.log(temp);
-                    i = false;
-                    console.log(i);
-                    return i;
-
                 } else {
                     image = temp.image.replace(/%2F/g, '/');
 
@@ -116,23 +109,15 @@ exports.update_product = async function (req, res){
                         }
                     }
                 }
-                console.log(i);
             });
-            console.log('i la: '+ i);
-            if (i === false) {
-                res.send({resutl: temp});
-                console.log(temp);
-            } else {
                 data.image = 'app%2Fstorage%2F' + rep;
 //            console.log("rep la:  "+ rep); //test
-                product.updateimg(data, await function (temp) {
+                    product.updateimg(data,  function (temp) {
                     res.send({resutl: temp});
                     console.log("update image");
                 })
-            }
+
         }
-
-
     }
 
 }
