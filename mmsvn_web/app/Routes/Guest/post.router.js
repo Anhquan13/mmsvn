@@ -10,6 +10,8 @@ module.exports = function(router){
     router.get('/post/list', postcontroller.get_list);
 
     router.get('/post/detail/:id', postcontroller.detail);
+
+    router.post('/post/upimg', upload.single('image'), postcontroller.add_image);
 /* just admin can edit add or delete post
 
     router.post('/post/add',upload.single('image'), postcontroller.add_post);

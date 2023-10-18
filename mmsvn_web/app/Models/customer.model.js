@@ -31,7 +31,7 @@ customer.getByid = function(id, resutl  ){
 
 customer.create = function(data, resutl){
 //    console.log ("tên là: " + data.name);  //kiểm tra bug
-    db.query("INSERT INTO customer set name =?, name_en =?, image= ?, detail =?, detail_en? ", [data.name, data.name_en, data.image, data.detail, data.detail_en],function (err,customer){
+    db.query("INSERT INTO customer set name =?, name_en =?, image= ?, detail =?, detail_en=? ", [data.name, data.name_en, data.image, data.detail, data.detail_en],function (err,customer){
         console.log (err, customer);
         if(err){
             resutl({status: "failed", msg: "Tạo mới không thành công"});

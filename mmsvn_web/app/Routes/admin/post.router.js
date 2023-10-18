@@ -14,7 +14,7 @@ module.exports = function(router){
 
     router.post('/post/add',upload.single('image'), postcontroller.add_post);
 
-    router.post('/post/upimg', upload.single('image'), postcontroller.add_image);
+//    router.post('/post/upimg', upload.single('image'), postcontroller.add_image);
 
     router.delete('/post/delete/:id', postcontroller.remove_post);
 

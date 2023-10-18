@@ -35,6 +35,8 @@ exports.photo = function (req){
 
 exports.upload_post = function (req){
     var img = req.file;
+    const baseUrl = req.protocol + '://' + req.get('host') + '/';
+//    console.log(baseUrl);
     var typei = ['image/png', 'image/jpg', 'image/jpeg'];
     if (!img) {
         const    error = new Error('Please upload an image');
@@ -51,7 +53,7 @@ exports.upload_post = function (req){
         error.httpStatusCode = 401;
         return error;
     }
-    return 'app/storage/'+ img.filename;
+    return baseUrl+ 'app/storage/'+ img.filename;
 }
 
 exports.upload_about = function (img){

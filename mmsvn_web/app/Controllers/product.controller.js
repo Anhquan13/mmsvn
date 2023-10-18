@@ -89,7 +89,7 @@ exports.update_product = async function (req, res){
             res.send(rep.message);
         } else {
             var i = true;
-             a = product.getByid(data.id_product, await  function (temp) {
+             product.getByid(data.id_product, await  function (temp) {
                 if (temp.err === "error") {
                     console.log(temp);
                     i = false;
@@ -125,7 +125,7 @@ exports.update_product = async function (req, res){
             } else {
                 data.image = 'app%2Fstorage%2F' + rep;
 //            console.log("rep la:  "+ rep); //test
-                product.updateimg(data, function (temp) {
+                product.updateimg(data, await function (temp) {
                     res.send({resutl: temp});
                     console.log("update image");
                 })
