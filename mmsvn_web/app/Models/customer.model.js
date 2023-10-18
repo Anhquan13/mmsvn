@@ -13,7 +13,7 @@ customer.get_all = function(resutl){
 
     db.query("select * from customer", function (err,customer){
         if(err){
-            resutl("yes!");
+            resutl({status: "failed", msg: "Không thành công"});
         }
         else     resutl(customer);
     });
@@ -23,7 +23,7 @@ customer.getByid = function(id, resutl  ){
     db.query("select * from customer where id = ?",id,function (err,customer){
 //        console.log (err,customer);
         if(err || (customer.length==0)){
-            resutl("Khong co customer");
+            resutl({status: "failed", msg: "Khong co customer nay"});
         }
         else     {resutl (customer[0]);}
     });
@@ -34,8 +34,8 @@ customer.create = function(data, resutl){
     db.query("INSERT INTO customer set name =?, name_en =?, image= ?, detail =?, detail_en? ", [data.name, data.name_en, data.image, data.detail, data.detail_en],function (err,customer){
         console.log (err, customer);
         if(err){
-            resutl("lỗi cmnr ");
-        } else resutl({data});
+            resutl({status: "failed", msg: "Tạo mới không thành công"});
+        } else resutl({status: "success", msg: "Tạo mới thành công", new_customer: data});
         console.log (err);
     })
 
@@ -44,7 +44,7 @@ customer.create = function(data, resutl){
 customer.remove = function(id, resutl){
     db.query("DELETE FROM customer WHERE id =?", id, function (err, customer){
         if(err){
-            resutl(null);
+            resutl({status: "failed", msg: "Xóa không thành công"});
         }
         else{
             resutl("xóa customer " + id +" thành công!!!!")
@@ -56,12 +56,12 @@ customer.update = function (data, result){
     db.query ("UPDATE customer  SET name= ?, name_en = ?, detail = ?, detail_en=?  WHERE id=?", [data.name, data.name_en, data.detail, data.detail_en,parseInt(data.id) ],function (err, customer) {
         if(err){
             console.log (err);
-            result(null);
+            result({status: "failed", msg: "Update không thành công"});
 
         }
         else {
             console.log("update thanh cong");
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }
@@ -70,11 +70,11 @@ customer.updateimg = function (data, result){
     db.query ("UPDATE customer  SET name= ?,  name_en = ?, image=?, detail = ?, detail_en=?  WHERE id=?", [data.name, data.name_en, data.image, data.detail, data.detail_en,parseInt(data.id) ],function (err, customer) {
         if(err){
             console.log (err);
-            result(null);
+            result({status: "failed", msg: "Upload không thành công"});
         }
         else {
             console.log("update thanh cong");
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }

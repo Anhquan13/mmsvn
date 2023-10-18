@@ -40,7 +40,7 @@ exports.login = function (req, res){
         if(response){
             const _token = await JWT.make(response);
             const _rtoken = await JWT.rt_make(response);
-            res.send({token: _token, refresh_token : _rtoken, status: true});
+            res.send({ username: response.id_user, name: response.name ,token: _token, refresh_token : _rtoken, status: true});
         }else{
             res.send({results: 'Password hoặc tên đăng nhập sai ', status: false});
         }

@@ -16,7 +16,7 @@ post.get_all = function(resutl){
 
     db.query("select * from post", function (err,post){
         if(err){
-            resutl("yes!");
+            resutl({status: "failed", msg: "Khong co post"});
         }
         else     resutl(post);
     });
@@ -26,7 +26,7 @@ post.getByid = function(id_post, resutl  ){
     db.query("select * from post where id_post = ?",id_post,function (err,post){
 //        console.log (err,post);
         if(err || (post.length==0)){
-            resutl("yes");
+            resutl({status: "failed", msg: "Khong co post nay"});
         }
         else     {resutl (post[0]);}
     });
@@ -37,8 +37,10 @@ post.create = function(data, resutl){
     db.query("INSERT INTO post set name =?, name_en =?, content =?, content_en  =?,image =?, cre_date =?,  author =?, id_user=? ", [data.name, data.name_en, data.content, data.content_en, data.image, data.cre_date, data.author, data.id_user],function (err,post){
         console.log (err, post);
         try{
-            resutl({data});
-        } catch(err){ console.log ("lỗi cmnr "+ err );}
+            resutl({status: "success", msg: "Tạo mới thành công", new_post: data});
+        } catch(err){
+            resutl({status: "failed", msg: "Tạo mới không thành công"});
+            console.log (err );}
 
     })
 
@@ -50,6 +52,7 @@ post.remove = function(id_post, resutl){
         try{
             resutl("xóa post " + id_post +" thành công!!!!")
         }catch(err){
+            resutl({status: "failed", msg: "Xóa không thành công"});
             console.log(err + "Loi r ");
         }
     })
@@ -58,13 +61,14 @@ post.remove = function(id_post, resutl){
 post.update = function (data, result){ //no image
     db.query ("UPDATE post  SET name= ?, name_en =?, content =?, content_en  =?, author =?  WHERE id_post =?", [data.name, data.name_en, data.content, data.content_en, data.author,parseInt(data.id_post) ],function (err, post) {
         if(err){
+
             console.log (err);
-            result(null);
+            result({status: "failed", msg: "Update không thành công"});
 
         }
         else {
             console.log("update thanh cong");
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }
@@ -73,11 +77,11 @@ post.updateimg = function (data, result){
     db.query ("UPDATE post  SET name= ?, name_en =?, content =?, content_en  =?,image =?, author =?  WHERE id_post = ?", [data.name, data.name_en, data.content, data.content_en, data.image, data.author, parseInt(data.id_post)],function (err, post) {
         if(err){
             console.log (err);
-            result(null);
+            result({status: "failed", msg: "Update không thành công"});
         }
         else {
             console.log("update thanh cong");
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }

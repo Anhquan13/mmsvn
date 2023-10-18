@@ -16,7 +16,7 @@ sub.get_all = function(resutl){
 
     db.query("select * from sub", function (err,sub){
         if(err){
-            resutl("yes!");
+            resutl({status: "failed", msg: "Khong co sub"});
         }
         else     resutl(sub);
     });
@@ -26,7 +26,7 @@ sub.getByid = function(id_sub, resutl  ){
     db.query("select * from sub where id_sub = ?",id_sub,function (err,sub){
 //        console.log (err,sub);
         if(err || (sub.length==0)){
-            resutl("err");
+            resutl({status: "success", msg: "Khong co sub"});
         }
         else     {resutl (sub[0]);}
     });
@@ -34,11 +34,13 @@ sub.getByid = function(id_sub, resutl  ){
 
 sub.create = function(data, resutl){
 //    console.log ("tên là: " + data.name);  //kiểm tra bug
-    db.query("INSERT INTO sub set name =?, name_en =?, content =?, content_en  =?,image =?, cre_date =?,  id_product, id_user=? ", [data.name, data.name_en, data.content, data.content_en, data.image, data.cre_date, data.id_product, data.id_user],function (err,sub){
-        console.log (err, sub);
+    db.query("INSERT INTO sub set name =?, name_en =?, content =?, content_en  =?,image =?, cre_date =?,  id_product=?, id_user=? ", [data.name, data.name_en, data.content, data.content_en, data.image, data.cre_date, data.id_product, data.id_user],function (error,sub){
+        console.log (error, sub);
         try{
-            resutl({data});
-        } catch(err){ console.log ("lỗi cmnr "+ err );}
+            resutl({status: "success", msg: "Tạo mới thành công", new_sub_product: data});
+        } catch(error){
+            resutl({status: "failed", msg: "Tạo mới không thành công"});
+            console.log ("bug again!! "+ err );}
 
     })
 
@@ -50,21 +52,22 @@ sub.remove = function(id_sub, resutl){
         try{
             resutl("xóa sub " + id_sub +" thành công!!!!")
         }catch(err){
-            console.log(err + "Loi r ");
+            console.log("bug: " + err );
+            resutl({status: "failed", msg: "Xóa không thành công"});
         }
     })
 }
 
 sub.update = function (data, result){ //no image
-    db.query ("UPDATE sub  SET name= ?, name_en =?, content =?, content_en  =?, id_product  WHERE id_sub =?", [data.name, data.name_en, data.content, data.content_en, data.id_product,parseInt(data.id_sub) ],function (err, sub) {
+    db.query ("UPDATE sub  SET name= ?, name_en =?, content =?, content_en  =?, id_product=?  WHERE id_sub =?", [data.name, data.name_en, data.content, data.content_en, data.id_product,parseInt(data.id_sub) ],function (err, sub) {
         if(err){
             console.log (err);
-            result(null);
+            result({status: "failed", msg: "Update không thành công"});
 
         }
         else {
             console.log("update thanh cong");
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }
@@ -73,11 +76,11 @@ sub.updateimg = function (data, result){
     db.query ("UPDATE sub  SET name= ?, name_en =?, content =?, content_en  =?,image =?, id_product =?  WHERE id_sub = ?", [data.name, data.name_en, data.content, data.content_en, data.image, data.id_product, parseInt(data.id_sub)],function (err, sub) {
         if(err){
             console.log (err);
-            result(null);
+            result({status: "failed", msg: "Update không thành công"});
         }
         else {
             console.log("update thanh cong");
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }

@@ -9,7 +9,7 @@ banner.get_all = function(resutl){
 
     db.query("select * from banner", function (err,banner){
         if(err){
-            resutl("hêloojfd");
+            resutl({status: "failed", msg: "Không thành công"});
         }
         else     resutl(banner);
     });
@@ -19,7 +19,7 @@ banner.getByid = function(id_bn, resutl  ){
     db.query("select * from banner where id_bn = ?",id_bn,function (err,banner){
         console.log (err,banner);
         if(err|| banner.length==0){
-            resutl("hêlofojcfd");
+            resutl({status: "failed", msg: "Không thành công"});
         }
         else     resutl ( banner[0]);
     });
@@ -52,10 +52,10 @@ banner.update = function (data, result){
     db.query ("UPDATE banner SET link= ? WHERE id_bn=?", [data.link ,data.id_bn ],function (err, banner) {
         console.log (err);
         if(err){
-            result(null);
+            result({status: "failed", msg: "Update không thành công"});
         }
         else {
-            result({data})
+            result({status: "success", msg: "Update thành công"})
         }
     })
 }

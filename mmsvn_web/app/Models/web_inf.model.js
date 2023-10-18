@@ -15,7 +15,7 @@ webinf.get_all = function(resutl){
 
     db.query("select * from web_inf", function (err,webinf){
         if(err){
-            resutl("hêloojfd");
+            resutl({status: "success", msg: "Khong co infomation"});
         }
         else     resutl(webinf);
     });
@@ -25,7 +25,7 @@ webinf.getByid = function(id, resutl  ){
     db.query("select * from web_inf where id = ?",id,function (err,webinf){
         console.log (err,webinf);
         if(err|| webinf.length==0){
-            resutl("hêlofojcfd");
+            resutl({status: "success", msg: "Khong co thong tin nay"});
         }
         else     resutl ( webinf[0]);
     });
@@ -60,13 +60,13 @@ webinf.update = function (data, result){
             if (webinfData.error) {
                 throw webinfData.error;
             }
-            result({data});
+            result({status: "success", msg: "Update thành công"});
 //            console.log(webinfData); // fixed
         });
 
     } catch (err) {
         console.log(err);
-        result({ error: err });
+        result({status: "failed", msg: "Update không thành công", error: err });
     }
 };
 

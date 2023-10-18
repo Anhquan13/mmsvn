@@ -70,51 +70,72 @@ exports.remove_product = function (req, res){
     })
 
 }
-exports.update_product = function (req, res){
+exports.update_product = async function (req, res){
     var data = req.body;
     console.log("hello " + data.id_product);
     data.edit_date = date;
+
+    var temp;
     if(data.image==""){
+
         console.log("update no image");
         product.update(data, function (temp){
-            res.send({resutl: "update successfully"});
+            res.send({temp});
         })
     }else{
+
         var rep = up.photo(req);
         if (rep instanceof Error){
             res.send(rep.message);
-        } else{
-            product.getByid(data.id_product,function (temp){
-//       res.send({resutl: data})
-                console.log("temp.image =" + temp.image);
-                image = temp.image.replace(/%2F/g, '/');
+        } else {
+            var i = true;
+             a = product.getByid(data.id_product, await  function (temp) {
+                if (temp.err === "error") {
+                    console.log(temp);
+                    i = false;
+                    console.log(i);
+                    return i;
+
+                } else {
+                    image = temp.image.replace(/%2F/g, '/');
+
 //                console.log("image 1 = " +image);
-                try {
-                    fs.unlink(image, function (err) {
-                        if (err) {
-                            console.log(err);
+                    try {
+                        fs.unlink(image, function (err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('File deleted!');
+                            }
+                        });
+                    } catch (err) {
+                        if (err.code === 'ENOENT') {
+                            console.log('File not found');
                         } else {
-                            console.log('File deleted!');
+                            throw err;
                         }
-                    });
-                } catch (err) {
-                    if (err.code === 'ENOENT') {
-                        console.log('File not found');
-                    } else {
-                        throw err;
                     }
                 }
+                console.log(i);
             });
-            data.image = 'app%2Fstorage%2F'+ rep;
-//            console.log("rep la:  "+ rep); //test
-            product.updateimg(data, function (temp){
+            console.log('i la: '+ i);
+            if (i === false) {
                 res.send({resutl: temp});
-            })
+                console.log(temp);
+            } else {
+                data.image = 'app%2Fstorage%2F' + rep;
+//            console.log("rep la:  "+ rep); //test
+                product.updateimg(data, function (temp) {
+                    res.send({resutl: temp});
+                    console.log("update image");
+                })
+            }
         }
-        console.log("update image");
+
 
     }
 
 }
+
 
 
