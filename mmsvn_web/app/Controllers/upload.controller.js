@@ -35,7 +35,7 @@ exports.photo = function (req){
 
 exports.upload_post = function (req){
     var img = req.file;
-    const baseUrl = req.protocol + '://' + req.get('host') + '/';
+    const baseUrl = req.protocol + '://' + req.get('host') + '/read_image/';
 //    console.log(baseUrl);
     var typei = ['image/png', 'image/jpg', 'image/jpeg'];
     if (!img) {
