@@ -53,7 +53,7 @@ exports.upload_post = function (req){
         error.httpStatusCode = 401;
         return error;
     }
-    return baseUrl+ 'app/storage/'+ img.filename;
+    return baseUrl+ 'app%2Fstorage%2F'+ img.filename;
 }
 
 exports.upload_about = function (img){
