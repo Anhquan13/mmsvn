@@ -113,7 +113,7 @@ exports.update_product = async function (req, res){
                 data.image = 'app%2Fstorage%2F' + rep;
 //            console.log("rep la:  "+ rep); //test
                     product.updateimg(data,  function (temp) {
-                    res.send({resutl: temp});
+                    res.send({result: temp});
                     console.log("update image");
                 })
 

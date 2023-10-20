@@ -4,20 +4,20 @@ const JWT = require('../common/JsonWebToken');
 
 exports.get_list = function(req,res){
     account.get_all(function(data){
-        res.send({resutl: data})
+        res.send({result: data})
     })
 };
 
 exports.detail = function(req,res){
     account.getByid(req.params.id, function (data){
-        res.send({resutl: data})
+        res.send({result: data})
     });
 };
 
 exports.add_account = function(req,res){
     var data = req.body;
     account.create(data,function(temp){
-        res.send({resutl: temp})
+        res.send({result: temp})
     })
 }
 exports.remove_account = function (req, res){
@@ -30,7 +30,7 @@ exports.remove_account = function (req, res){
 exports.update_account = function (req, res){
     var data = req.body;
     account.update(data, function (temp){
-        res.send({resutl: temp});
+        res.send({result: temp});
             })
 }
 
