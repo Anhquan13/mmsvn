@@ -89,10 +89,11 @@ exports.update_product = async function (req, res){
             await  product.getByid(data.id_product, function (temp) {
                 if (temp.err === "error") {
                     console.log(temp);
+                    res.send({result: temp});
                 } else {
                     image = temp.image.replace(/%2F/g, '/');
 
-//                console.log("image 1 = " +image);
+                    console.log("image 1 = " +image);
                     try {
                         fs.unlink(image, function (err) {
                             if (err) {
@@ -108,14 +109,15 @@ exports.update_product = async function (req, res){
                             throw err;
                         }
                     }
-                }
-            });
-                data.image = 'app%2Fstorage%2F' + rep;
+                    data.image = 'app%2Fstorage%2F' + rep;
 //            console.log("rep la:  "+ rep); //test
                     product.updateimg(data,  function (temp) {
-                    res.send({result: temp});
-                    console.log("update image");
-                })
+                        res.send({result: temp});
+                        console.log("update image");
+                    })
+                }
+            });
+
 
         }
     }

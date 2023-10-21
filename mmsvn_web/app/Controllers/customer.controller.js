@@ -35,18 +35,34 @@ exports.remove_customer = function (req, res){
     var image;
     customer.getByid(req.params.id,function (data){
 //       res.send({results: data})
-//        console.log("data.image =" + data.image);
+        if (data.err === "error") {
+            console.log(data);
+            res.send(data);
+        } else {
+        console.log("data.image =" + data);
         image = data.image.replace(/%2F/g, '/');
+        }
 //        console.log("image 1 = " +image);
     });
 
     customer.remove(id, function(temp){
         res.send({results: temp});
         console.log("image  = " +image);
-        fs.unlink(image , function (err) {
-            if (err) throw err;
-            console.log('File deleted!');
-        });
+        try {
+            fs.unlink(image, function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('File deleted!');
+                }
+            });
+        } catch (err) {
+            if (err.code === 'ENOENT') {
+                console.log('File not found');
+            } else {
+                throw err;
+            }
+        }
     })
 
 }
@@ -65,20 +81,28 @@ exports.update_customer = function (req, res){
             res.send(rep.message);
         } else{
             customer.getByid(data.id,function (temp){
-                console.log("temp.image =" + temp.image);
-                image = temp.image.replace(/%2F/g, '/');
+                if (temp.err === "error") {
+                    console.log(temp);
+                    res.send({result: temp});
+                }else {
+                    console.log("temp.image =" + temp.image);
+                    image = temp.image.replace(/%2F/g, '/');
 //                console.log("image 1 = " +image);
-                fs.unlink(image , function (err) {
-                    try{
-                        console.log('File deleted!');}
-                    catch(err){console.log(err)}
-                });
-            });
-            data.image = 'app%2Fstorage%2F'+ rep;
+                    fs.unlink(image, function (err) {
+                        try {
+                            console.log('File deleted!');
+                        } catch (err) {
+                            console.log(err)
+                        }
+                    });
+                    data.image = 'app%2Fstorage%2F'+ rep;
 //            console.log("rep la:  "+ rep); //test
-            customer.updateimg(data, function (temp){
-                res.send({results: temp});
-            })
+                    customer.updateimg(data, function (temp){
+                        res.send({results: temp});
+                    })
+                }
+            });
+
         }
         console.log("update image");
 

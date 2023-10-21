@@ -27,7 +27,7 @@ exports.add_post = function(req,res){
 
 
     } else{
-        data.image = '%2Fapp%2Fstorage%2F'+ rep;
+        data.image = 'app%2Fstorage%2F'+ rep;
         post.create(data, function(temp){
             res.send({results: temp})
         })

@@ -23,7 +23,7 @@ customer.getByid = function(id, resutl  ){
     db.query("select * from customer where id = ?",id,function (err,customer){
 //        console.log (err,customer);
         if(err || (customer.length==0)){
-            resutl({status: "failed", msg: "Khong co customer nay"});
+            resutl({status: "failed", msg: "Khong co customer nay" , err: "error"});
         }
         else     {resutl (customer[0]);}
     });
@@ -47,7 +47,7 @@ customer.remove = function(id, resutl){
             resutl({status: "failed", msg: "Xóa không thành công"});
         }
         else{
-            resutl("xóa customer " + id +" thành công!!!!")
+            resutl({status: "success", msg: "Xóa customer "+ id + " thành công",})
         }
     })
 }

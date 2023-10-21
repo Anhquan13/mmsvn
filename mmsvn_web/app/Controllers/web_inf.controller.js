@@ -51,7 +51,8 @@ exports.remove_webinf = function (req, res){
         });
     })
 
-}
+}// hellooooogit
+}// hellooooogit
 */
 exports.update_webinf = function (req, res){
     var data = req.body;

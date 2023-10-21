@@ -9,11 +9,11 @@ const account = function(){
 
 account.get_all = function(resutl){
 
-    db.query("select * from user", function (err,account){
+    db.query("select id_user, name from user", function (err,account){
         if(err){
             resutl( {status: "failed", msg: "không thành công"});
         }
-        else     resutl(account);
+        else     resutl({account});
     });
 }
 account.getByid = function(id_user, resutl  ){
@@ -23,7 +23,7 @@ account.getByid = function(id_user, resutl  ){
         if(err|| account.length==0){
             resutl( {status: "failed", msg: "không thành công"});
         }
-        else     resutl ( account[0]);
+        else     resutl ( {id: account[0].id_user,name:account[0].name});
     });
 }
 

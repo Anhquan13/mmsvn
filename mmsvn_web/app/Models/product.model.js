@@ -54,7 +54,7 @@ product.remove = function(id_product, result){
             result({status: "failed", msg: "Xóa không thành công"});
         }
         else{
-            result("xóa product " + id_product +" thành công!!!!")
+            result({status: "success", msg: "Xóa sản phẩm "+ id_product + " thành công",})
         }
     })
 }
