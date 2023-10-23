@@ -6,15 +6,15 @@ module.exports = function(router){
 
 
 
-    router.get('/banner/list', bannercontroller.get_list);
+    router.get('/banner/list', bannercontroller.get_list); // done
 
-    router.get('/banner/detail/:id', bannercontroller.detail);
+    router.get('/banner/detail/:id', bannercontroller.detail); //done
 
 //    router.post('/banner/add',upload.single('image'), bannercontroller.add_banner);
 
 //    router.delete('/banner/delete/:id', bannercontroller.remove_banner);
 
-    router.put('/banner/update/', upload.single('image'), bannercontroller.update_banner);
+    router.put('/banner/update/', upload.single('image'), bannercontroller.update_banner); // done
 
 
 

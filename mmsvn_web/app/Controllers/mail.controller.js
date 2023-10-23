@@ -25,3 +25,5 @@ exports.sendmail = async function(req,res){
         res.send({status: "fail", msg: "something miss", error: error});
     }
 };
+
+

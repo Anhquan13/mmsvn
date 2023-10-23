@@ -26,7 +26,7 @@ sub.getByid = function(id_sub, resutl  ){
     db.query("select * from sub where id_sub = ?",id_sub,function (err,sub){
 //        console.log (err,sub);
         if(err || (sub.length==0)){
-            resutl({status: "success", msg: "Khong co sub"});
+            resutl({status: "success", msg: "Khong co sub", err: "error"});
         }
         else     {resutl (sub[0]);}
     });

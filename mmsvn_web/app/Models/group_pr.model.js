@@ -49,9 +49,11 @@ group_pr.remove = function(id_group, resutl){
 }
 
 group_pr.update = function (data, result){
-    db.query ("UPDATE group_pr SET name= ?, detail = ?, detail_en WHERE id_group=?", [data.name, data.detail, data.detail_en,data.id_group ],function (err, group_pr) {
+    console.log("id_group = "+ data.id_group);
+    db.query ("UPDATE group_pr SET name= ?, detail = ?, detail_en=? WHERE id_group = ?", [data.name, data.detail, data.detail_en, parseInt(data.id_group) ],function (err, group_pr) {
         console.log (err);
         if(err){
+            console.log (data.id_group);
             result({status: "failed", msg: "Update không thành công"});
         }
         else {

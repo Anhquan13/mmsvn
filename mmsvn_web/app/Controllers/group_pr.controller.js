@@ -27,6 +27,7 @@ exports.remove_group_pr = function (req, res){
 
 exports.update_group_pr = function (req, res){
     var data = req.body;
+    console.log("hhehe "+ data.id_group);
     group_pr.update(data, function (temp){
         res.send({results: temp});
     })

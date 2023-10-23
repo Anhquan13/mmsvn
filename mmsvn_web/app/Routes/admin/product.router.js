@@ -6,15 +6,15 @@ module.exports = function(router){
 
 
 
-    router.get('/product/list', productcontroller.get_list);
+    router.get('/product/list', productcontroller.get_list);  //done
 
     router.get('/product/detail/:id', productcontroller.detail);
 
-    router.post('/product/add',upload.single('image'), productcontroller.add_product);
+    router.post('/product/add',upload.single('image'), productcontroller.add_product); //done
 
-    router.delete('/product/delete/:id', productcontroller.remove_product);
+    router.delete('/product/delete/:id', productcontroller.remove_product); //done
 
-    router.put('/product/update/', upload.single('image'), productcontroller.update_product);
+    router.put('/product/update/', upload.single('image'), productcontroller.update_product); //done
     
     
 

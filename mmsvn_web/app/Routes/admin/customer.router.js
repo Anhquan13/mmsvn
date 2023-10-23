@@ -6,15 +6,15 @@ module.exports = function(router){
 
 
 
-    router.get('/customer/list', customercontroller.get_list);
+    router.get('/customer/list', customercontroller.get_list);//done
 
-    router.get('/customer/detail/:id', customercontroller.detail);
+    router.get('/customer/detail/:id', customercontroller.detail); //done
 
-    router.post('/customer/add',upload.single('image'), customercontroller.add_customer);
+    router.post('/customer/add',upload.single('image'), customercontroller.add_customer);//done
 
-    router.delete('/customer/delete/:id', customercontroller.remove_customer);
+    router.delete('/customer/delete/:id', customercontroller.remove_customer); //done
 
-    router.put('/customer/update/', upload.single('image'), customercontroller.update_customer);
+    router.put('/customer/update/', upload.single('image'), customercontroller.update_customer);//done
 
 
 

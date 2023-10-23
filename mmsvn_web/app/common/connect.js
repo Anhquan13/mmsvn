@@ -1,7 +1,7 @@
 var msql = require('mysql2');
 
 var conn = msql.createConnection({
-    host : '192.168.51.2',
+    host : 'localhost',
     port : '3306',
     user : 'sa',
     password: '1234',
