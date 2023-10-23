@@ -17,11 +17,11 @@ exports.sendmail = async function(req,res){
         // Thực hiện gửi email
         await mailer.sendMail(to, subject, data.content);
         // Quá trình gửi email thành công thì gửi về thông báo success cho người dùng
-        res.send({status: "success", msg: "Your email has been sent successfully.", content: data.contents})
-        console.log(data.contents);
+        res.send({status: "success", msg: "Your email has been sent successfully.", content: data.content})
+        console.log(data.content);
     } catch (error) {
         // Nếu có lỗi thì log ra để kiểm tra và cũng gửi về client
         console.log(error);
-        res.send(error);
+        res.send({status: "fail", msg: "something miss", error: error});
     }
 };
