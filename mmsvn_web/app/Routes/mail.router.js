@@ -1,12 +1,9 @@
 module.exports = function(router){
 
-    const mailcontroller = require('../Controllers/mail.controller')
+    const mailcontroller = require('../Controllers/mail.controller');
 
 
-
-
-
-    router.post('/send', mailcontroller.sendmail);
+    router.post('/sendmail/',mailcontroller.sendmail);
 
 
 

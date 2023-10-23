@@ -1,4 +1,6 @@
 const account = require('../Models/account.model');
+const mailer = require('../common/mailer');
+
 const JWT = require('../common/JsonWebToken');
  
 
@@ -46,4 +48,6 @@ exports.login = function (req, res){
         }
     })
 }
+
+
 
