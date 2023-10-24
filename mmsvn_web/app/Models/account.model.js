@@ -64,7 +64,7 @@ account.update = function (data, result){
 account.check_login = function (data, result){
     db.query("Select name, id_user from user where id_user = ? and pw = ?", [data.id_user, data.pw], function (err, account){
         if (err || account.length == 0){
-            result({status: "failed", msg: "username hoặc password sai"});
+            result(null);
         }
         else {
             result(account[0]);

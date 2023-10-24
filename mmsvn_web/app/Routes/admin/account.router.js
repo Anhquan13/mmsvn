@@ -10,7 +10,7 @@ router.get('/account/detail/:id', accountcontroller.detail); //done
 
 router.post('/account/add', accountcontroller.add_account); // done
 
-router.post('/account/login', accountcontroller.login); // done
+//router.post('/account/login', accountcontroller.login); // done
 
 router.delete('/account/delete/:id', accountcontroller.remove_account); //done
 

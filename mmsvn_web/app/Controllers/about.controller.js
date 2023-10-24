@@ -29,7 +29,7 @@ exports.update_about = function (req, res){
     if(data.image1==""){
         console.log("update no image");
         about_us.update(data, function (temp){
-            res.send({result: temp});
+            res.send({results: temp});
         })
     }else{
         var rep1 = up.upload_about(image1);
@@ -79,7 +79,7 @@ exports.update_about = function (req, res){
 
 //            console.log("rep la:  "+ rep); //test
             about_us.updateimg(data, function (temp){
-                res.send({result: temp});
+                res.send({results: temp});
             })
         }
         console.log("update image");

@@ -18,7 +18,7 @@ const product = function(){
 }
 product.get_all = function(result){
 
-    db.query("select * from product", function (err,product){
+    db.query("select * from product order by cre_date desc", function (err,product){
         if(err){
             result({status: "failed", msg: "Khong co san pham"});
         }

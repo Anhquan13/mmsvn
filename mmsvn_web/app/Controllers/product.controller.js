@@ -47,7 +47,7 @@ exports.remove_product = function (req, res) {
 //        console.log("data.image =" + data.image);
         if (data.err === "error") {
             console.log(data);
-            res.send({result: data});
+            res.send({results: data});
         } else {
             image = data.image.replace(/%2F/g, '/');
             product.remove(id, function (temp) {
@@ -82,13 +82,13 @@ exports.update_product = async function (req, res) {
     product.getByid(data.id_product, function (temp) {
         if (temp.err === "error") {
             console.log(temp);
-            res.send({result: temp});
+            res.send({results: temp});
         } else {
             if (data.image == "") {
 
                 console.log("update no image");
                 product.update(data, function (temp) {
-                    res.send({temp});
+                    res.send({results: temp});
                 })
             } else {
                 var rep = up.photo(req);
@@ -117,7 +117,7 @@ exports.update_product = async function (req, res) {
                     data.image = 'app%2Fstorage%2F' + rep;
 //            console.log("rep la:  "+ rep); //test
                     product.updateimg(data, function (temp) {
-                        res.send({result: temp});
+                        res.send({results: temp});
                         console.log("update image");
                     })
                 }

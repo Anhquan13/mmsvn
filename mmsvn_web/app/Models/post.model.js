@@ -14,7 +14,7 @@ const post = function(){
 }
 post.get_all = function(resutl){
 
-    db.query("select * from post", function (err,post){
+    db.query("select * from post order by cre_date desc", function (err,post){
         if(err){
             resutl({status: "failed", msg: "Khong co post"});
         }
